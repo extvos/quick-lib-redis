@@ -10,56 +10,56 @@ import java.util.concurrent.TimeUnit;
  */
 public interface QuickRedisService {
     /**
-     *
-     * @param key
-     * @param value
+     * set a key-value
+     * @param key string
+     * @param value object
      */
     void set(String key, Object value);
 
     /**
-     *
-     * @param key
-     * @param value
-     * @param expires
+     * set a key-value with expires
+     * @param key string
+     * @param value object
+     * @param expires in seconds
      */
     void set(String key, Object value, long expires);
 
 
     /**
-     *
-     * @param key
-     * @param value
-     * @param duration
+     * set a key-value with expires
+     * @param key string
+     * @param value object
+     * @param duration as expires
      */
     void set(String key, Object value, Duration duration);
 
     /**
-     *
-     * @param key
-     * @param value
-     * @param expires
-     * @param unit
+     * set key-value with expires and unit
+     * @param key string
+     * @param value object
+     * @param expires expires as long
+     * @param unit time unit for expires
      */
     void set(String key, Object value, long expires, TimeUnit unit);
 
     /**
-     *
-     * @param key
+     * get value via key
+     * @param key string
      * @return object by key
      */
     Object get(String key);
 
     /**
-     *
-     * @param key
-     * @param value
+     * get and set key-value
+     * @param key string
+     * @param value object
      * @return object of key
      */
     Object getAndSet(String key, Object value);
 
     /**
-     *
-     * @param keys
+     * get multiple keys
+     * @param keys in collection
      * @return objects with keys
      */
     List<Object> multiGet(Collection<String> keys);
