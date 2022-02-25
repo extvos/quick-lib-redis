@@ -45,7 +45,7 @@ public interface QuickRedisService {
     /**
      *
      * @param key
-     * @return
+     * @return object by key
      */
     Object get(String key);
 
@@ -53,14 +53,14 @@ public interface QuickRedisService {
      *
      * @param key
      * @param value
-     * @return
+     * @return object of key
      */
     Object getAndSet(String key, Object value);
 
     /**
      *
      * @param keys
-     * @return
+     * @return objects with keys
      */
     List<Object> multiGet(Collection<String> keys);
 }
