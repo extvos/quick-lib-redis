@@ -26,7 +26,7 @@ public class QuickRedisServiceImpl implements QuickRedisService {
 
     @Override
     public void set(String key, Object value, long expires) {
-        redisTemplate.opsForValue().set(key, value, expires);
+        redisTemplate.opsForValue().set(key, value, expires, TimeUnit.SECONDS);
     }
 
     @Override
