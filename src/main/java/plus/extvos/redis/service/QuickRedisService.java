@@ -49,6 +49,15 @@ public interface QuickRedisService {
      */
     Object get(String key);
 
+
+    /**
+     * delete a giving key
+     *
+     * @param key string
+     * @return
+     */
+    Boolean delete(String key);
+
     /**
      * get and set key-value
      * @param key string
@@ -63,4 +72,11 @@ public interface QuickRedisService {
      * @return objects with keys
      */
     List<Object> multiGet(Collection<String> keys);
+
+    /**
+     * get keys by pattern
+     * @param pattern string
+     * @return collection of keys
+     */
+    Collection<String> keys(String pattern);
 }
