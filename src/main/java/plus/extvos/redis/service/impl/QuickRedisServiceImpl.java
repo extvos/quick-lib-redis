@@ -6,9 +6,9 @@ import plus.extvos.redis.service.QuickRedisService;
 import plus.extvos.redis.service.QuickRedisTemplate;
 
 import java.time.Duration;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author shenmc
@@ -62,5 +62,39 @@ public class QuickRedisServiceImpl implements QuickRedisService {
     @Override
     public Collection<String> keys(String pattern) {
         return redisTemplate.keys(pattern);
+    }
+
+    @Override
+    public Object hget(String key, String field) {
+        return redisTemplate.opsForHash().get(key, field);
+    }
+
+    @Override
+    public void hdelete(String key, String... fields) {
+        redisTemplate.opsForHash().delete(key, fields);
+    }
+
+    @Override
+    public Set<String> hkeys(String key) {
+        return redisTemplate.opsForHash().keys(key).stream().map(Object::toString).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Map<String, Object> hgetall(String key) {
+        Map<String, Object> m = new HashMap<>();
+        redisTemplate.opsForHash().entries(key).forEach((k, v) -> {
+            m.put(k.toString(), v);
+        });
+        return m;
+    }
+
+    @Override
+    public void hmset(String key, String field, Object value) {
+        redisTemplate.opsForHash().put(key, field, value);
+    }
+
+    @Override
+    public void hsetall(String key, Map<String, Object> vals) {
+        redisTemplate.opsForHash().putAll(key, vals);
     }
 }
