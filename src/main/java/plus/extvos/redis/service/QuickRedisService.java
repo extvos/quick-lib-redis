@@ -124,13 +124,21 @@ public interface QuickRedisService {
     Map<String, Object> hgetall(String key);
 
     /**
+     * Get multiple fields by key
+     * @param key
+     * @param fields
+     * @return
+     */
+    Map<String,Object> hmget(String key, String ...fields);
+
+    /**
      * Set field value of Hash map
      *
      * @param key
      * @param field
      * @param value
      */
-    void hmset(String key, String field, Object value);
+    void hset(String key, String field, Object value);
 
     /**
      * Set hash map value
@@ -138,5 +146,5 @@ public interface QuickRedisService {
      * @param key
      * @param vals
      */
-    void hsetall(String key, Map<String, Object> vals);
+    void hmset(String key, Map<String, Object> vals);
 }

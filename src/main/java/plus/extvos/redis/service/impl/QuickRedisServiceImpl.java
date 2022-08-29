@@ -89,12 +89,29 @@ public class QuickRedisServiceImpl implements QuickRedisService {
     }
 
     @Override
-    public void hmset(String key, String field, Object value) {
+    public Map<String, Object> hmget(String key, String... fields) {
+        Map<String, Object> ret = new HashMap<>();
+        if (fields.length < 1) {
+            return ret;
+        }
+        List<Object> vals = redisTemplate.opsForHash().multiGet(key, Arrays.asList(fields));
+        for (int i = 0; i < fields.length; i++) {
+            if (vals.size() <= i) {
+                ret.put(fields[i], null);
+            } else {
+                ret.put(fields[i], vals.get(i));
+            }
+        }
+        return ret;
+    }
+
+    @Override
+    public void hset(String key, String field, Object value) {
         redisTemplate.opsForHash().put(key, field, value);
     }
 
     @Override
-    public void hsetall(String key, Map<String, Object> vals) {
+    public void hmset(String key, Map<String, Object> vals) {
         redisTemplate.opsForHash().putAll(key, vals);
     }
 }
